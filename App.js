@@ -1,18 +1,20 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const score = document.querySelector('.score__value')
-const finalScore = document.querySelector('.final__score > span')
-const menu = document.querySelector('.menu__screen')
-const btnPlay = document.querySelector('.btn__play')
-const audio = new Audio("../assets/audio.mp3");
+const score = document.querySelector(".score__value");
+const finalScore = document.querySelector(".final__score > span");
+const menu = document.querySelector(".menu__screen");
+const btnPlay = document.querySelector(".btn__play");
+const audioFood = new Audio("/assets/audio.mp3");
+const audioGameOver = new Audio("/assets/GameOvermp3.mp3");
+const audioPlay = true;
 const size = 30;
 
-const initialPosition = { x: 270, y: 240 }
+const initialPosition = { x: 270, y: 240 };
 let snake = [initialPosition];
 
 const incrementScore = () => {
-  score.innerHTML = +score.innerHTML + 10
-}
+  score.innerHTML = +score.innerHTML + 10;
+};
 const randomNumber = (min, max) => {
   return Math.round(Math.random() * (max - min) + min);
 };
@@ -93,9 +95,9 @@ const drawGrid = () => {
 const chackEat = () => {
   const head = snake[snake.length - 1];
   if (head.x == food.x && head.y == food.y) {
-    incrementScore()
+    incrementScore();
     snake.push(head);
-    audio.play();
+    audioFood.play();
 
     let x = randomPosition();
     let y = randomPosition();
@@ -112,26 +114,31 @@ const chackEat = () => {
 
 const checkCollision = () => {
   const head = snake[snake.length - 1];
-  const canvasLimite = canvas.width - size
-  const neckIndex = snake.length -2
-  const wallCollision = 
-    head.x < 0 || head.x > canvasLimite || head.y < 0 || head.y > canvasLimite
+  const canvasLimite = canvas.width - size;
+  const neckIndex = snake.length - 2;
+  const wallCollision =
+    head.x < 0 || head.x > canvasLimite || head.y < 0 || head.y > canvasLimite;
 
-    const selfCollision = snake.find((position, index) => {
-      return index < neckIndex && position.x == head.x && position.y == head.y
-    })
+  const selfCollision = snake.find((position, index) => {
+    return index < neckIndex && position.x == head.x && position.y == head.y;
+  });
   if (wallCollision || selfCollision) {
-    gameOver()
+    gameOver();
   }
-
 };
 
 const gameOver = () => {
-  direction = undefined
-  menu.style.display = "flex"
-  finalScore.innerText = score.innerHTML
-  canvas.style.filter = "blur(6px)"
-}
+  direction = undefined;
+  menu.style.display = "flex";
+  finalScore.innerText = score.innerHTML;
+  canvas.style.filter = "blur(6px)";
+  for (var i = 0; i < 10; i++) {
+    if (audioPlay) {
+      audioGameOver.play();
+      audioPlay = false;
+    }
+  }
+};
 const gameLoop = () => {
   clearInterval(loopId);
 
@@ -164,10 +171,9 @@ document.addEventListener("keydown", ({ key }) => {
   }
 });
 
-btnPlay.addEventListener('click', () => {
-  score.innerText = "00"
-  menu.style.display = "none"
-  canvas.style.filter = "none"
-  snake = [initialPosition]
-})
-
+btnPlay.addEventListener("click", () => {
+  score.innerText = "00";
+  menu.style.display = "none";
+  canvas.style.filter = "none";
+  snake = [initialPosition];
+});
