@@ -5,8 +5,6 @@ const finalScore = document.querySelector(".final__score > span");
 const menu = document.querySelector(".menu__screen");
 const btnPlay = document.querySelector(".btn__play");
 const audioFood = new Audio("https://tonncarvalho.github.io/Jogo-da-cobrinha/assets/audio.mp3");
-const audioGameOver = new Audio("https://tonncarvalho.github.io/Jogo-da-cobrinha/assets/GameOvermp3.mp3");
-const audioPlay = true;
 const size = 30;
 
 const initialPosition = { x: 270, y: 240 };
@@ -132,12 +130,6 @@ const gameOver = () => {
   menu.style.display = "flex";
   finalScore.innerText = score.innerHTML;
   canvas.style.filter = "blur(6px)";
-  for (var i = 0; i < 10; i++) {
-    if (audioPlay) {
-      audioGameOver.play();
-      audioPlay = false;
-    }
-  }
 };
 const gameLoop = () => {
   clearInterval(loopId);
