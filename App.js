@@ -4,8 +4,8 @@ const score = document.querySelector(".score__value");
 const finalScore = document.querySelector(".final__score > span");
 const menu = document.querySelector(".menu__screen");
 const btnPlay = document.querySelector(".btn__play");
-const audioFood = new Audio("/assets/audio.mp3");
-const audioGameOver = new Audio("/assets/GameOvermp3.mp3");
+const audioFood = new Audio("https://tonncarvalho.github.io/Jogo-da-cobrinha/assets/audio.mp3");
+const audioGameOver = new Audio("https://tonncarvalho.github.io/Jogo-da-cobrinha/assets/GameOvermp3.mp3");
 const audioPlay = true;
 const size = 30;
 
