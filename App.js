@@ -50,7 +50,7 @@ const drawSnake = () => {
 
   snake.forEach((position, index) => {
     if (index == snake.length - 1) {
-      ctx.fillStyle = "#89CFF0";
+      ctx.fillStyle = "#0437F2";
     }
     ctx.fillRect(position.x, position.y, size, size);
   });
